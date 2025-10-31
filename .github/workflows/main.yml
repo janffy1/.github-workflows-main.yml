@@ -4,21 +4,31 @@ name: Business System Automation Learning
 on:
   push:
     branches:
-main
+      - main
+
 jobs:
   log-business-task:
     runs-on: ubuntu-latest
     steps:
-name: Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-name: Create business task log
+      - name: Create business task log
         run: |
           echo "New business task recorded at $(date)" >> business_task_log.txt
           cat business_task_log.txt
 
-name: Confirm workflow ran
+      - name: Commit and push log update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add business_task_log.txt
+          git commit -m "Update business task log [skip ci]" || echo "No changes to commit"
+          git push
+
+      - name: Confirm workflow ran
         run: echo ":white_check_mark: Workflow ran successfully!"
+
 
 
 
