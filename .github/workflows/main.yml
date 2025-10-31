@@ -1,0 +1,43 @@
+name: Business System Automation Learning
+
+# Trigger workflow on push to main branch
+on:
+  push:
+    branches:
+main
+jobs:
+  log-business-task:
+    runs-on: ubuntu-latest
+    steps:
+name: Checkout repository
+        uses: actions/checkout@v4
+
+name: Create business task log
+        run: |
+          echo "New business task recorded at $(date)" >> business_task_log.txt
+          cat business_task_log.txt
+
+name: Confirm workflow ran
+        run: echo ":white_check_mark: Workflow ran successfully!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
