@@ -1,3 +1,5 @@
+
+
 name: Business System Automation Learning
 
 # Trigger workflow on push to main branch
@@ -6,12 +8,18 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write  # allows the workflow to push changes
+
 jobs:
   log-business-task:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create business task log
         run: |
@@ -28,7 +36,6 @@ jobs:
 
       - name: Confirm workflow ran
         run: echo ":white_check_mark: Workflow ran successfully!"
-
 
 
 
